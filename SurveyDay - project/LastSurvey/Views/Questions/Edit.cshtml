@@ -1,0 +1,111 @@
+﻿@model LastSurvey.Models.Question
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@if (Session["LoggedUserNumber"] != null && Session["LoggedUserNumber"].ToString() == "admin")
+{
+    //*Page Question/Edit*//
+    //Visible for admin only//
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> Edit</h3>
+        </div>
+        <div class="panel-body">
+            <h4>@Model.Question1</h4>
+            @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.QuestionID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SurveyID, "SurveyID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("SurveyID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SurveyID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.QuestionTypeID, "QuestionTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("QuestionTypeID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.QuestionTypeID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Question1, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Question1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Question1, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaxValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MaxValue, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MaxValue, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MinValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinValue, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinValue, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <a href="@Url.Action("IndexAdmin", new {id = Model.SurveyID.Value })" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="go back">
+                            <span class="glyphicon glyphicon-backward"></span>
+                            <span> Back to list</span>
+                        </a>
+                        <button type="submit" value="Save" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Save">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            }
+       </div>
+    </div>
+}
+else
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-ban-circle"></span> Something gone wrong!</h3>
+        </div>
+        <div class="panel-body">
+            <h2>Ooops! You have been logged out</h2>
+            <h3>Only logged users can access this page!</h3>
+            <a href="@Url.Action("Index", "Home") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Go to survey list">
+                <span class="glyphicon glyphicon glyphicon-home"></span><span> Log in</span>
+            </a>
+        </div>
+
+    </div>
+}

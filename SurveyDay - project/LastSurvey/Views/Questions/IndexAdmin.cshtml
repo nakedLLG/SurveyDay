@@ -1,0 +1,150 @@
+﻿@using LastSurvey.Models
+@model IEnumerable<LastSurvey.Models.Question>
+@{
+    ViewBag.Title = "IndexAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@if (Session["LoggedUserNumber"] != null && Session["LoggedUserNumber"].ToString() == "admin")
+{
+    //*Page Question/IndexAdmin*//
+    //Visible for admin only//
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-list"></span> Questions for @ViewBag.Surv.Title</h3>
+        </div>
+        <div class="panel-body">
+            <a href="@Url.Action("Create")" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Create New">
+                <span class="glyphicon glyphicon-plus"></span> 
+                <span>Create New</span>
+            </a>
+        </div>
+        <table class="table">
+            <tr>
+                <th class="hidden-xs hidden-sm">
+                    @Html.DisplayNameFor(model => model.QuestionType.QuestionType1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Question1)
+                </th>
+                <th class="hidden-xs hidden-sm">
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th class="hidden-xs hidden-sm">
+                    @Html.DisplayNameFor(model => model.MaxValue)
+                </th>
+                <th class="hidden-xs hidden-sm">
+                    @Html.DisplayNameFor(model => model.MinValue)
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+
+            @foreach (var item in Model) {
+                <tr>
+                    <td class="hidden-xs hidden-sm">
+                        @Html.DisplayFor(modelItem => item.QuestionType.QuestionType1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Question1)
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+                        @Html.DisplayFor(modelItem => item.MaxValue)
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+                        @Html.DisplayFor(modelItem => item.MinValue)
+                    </td>
+                    <td>
+                        <div class="hidden-md hidden-lg">
+                            <div class="btn-group dropup">
+                                <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                    Action
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="@Url.Action("Edit", new { id = item.QuestionID })"  data-toggle="tooltip" data-placement="left" title="Edit">
+                                            <span class="glyphicon glyphicon-pencil"></span> <span> Edit</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Details", new { id = item.QuestionID })"  data-toggle="tooltip" data-placement="left" title="Details">
+                                            <span class="glyphicon glyphicon-info-sign"></span><span> Details</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Delete", new { id = item.QuestionID })"  data-toggle="tooltip" data-placement="left" title="Delete">
+                                            <span class="glyphicon glyphicon-remove"></span><span> Delete</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="hidden-xs hidden-sm">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Actions">
+                                <div class="btn-group" role="group" aria-label="Edit">
+                                    <a href="@Url.Action("Edit", new { id = item.QuestionID })" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Edit">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group" aria-label="Details">
+                                    <a href="@Url.Action("Details", new { id = item.QuestionID })" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Details">
+                                        <span class="glyphicon glyphicon-info-sign"></span>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group" aria-label="Delete">
+                                    <a href="@Url.Action("Delete", new { id = item.QuestionID })" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Delete">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+                      
+                    </td>
+                </tr>
+                }
+            
+                   
+        </table>
+        <div class="panel-footer">
+            <a href="@Url.Action("IndexAdmin", "Surveys")" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="go back">
+                <span class="glyphicon glyphicon-backward"></span>
+                <span>Back to list</span>
+            </a>
+        </div>   
+    </div>
+}
+else
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-ban-circle"></span> Something gone wrong!</h3>
+        </div>
+        <div class="panel-body">
+            <h2>Ooops! You have been logged out</h2>
+            <h3>Only logged users can access this page!</h3>
+            <a href="@Url.Action("Index", "Home") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Go to survey list">
+                <span class="glyphicon glyphicon glyphicon-home"></span><span> Log in</span>
+            </a>
+        </div>
+
+    </div>
+
+}

@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Submitted";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon glyphicon-ok"></span> Message</h3>
+    </div>
+    <div class="panel-body">
+        <h2>Perfect!</h2>
+        <h3>The message has been sent!</h3>
+        <a href="@Url.Action("Index", "SendMailer") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Send next message">
+            <span class="glyphicon glyphicon glyphicon glyphicon-envelope"></span><span> Send next one</span>
+        </a>
+    </div>
+
+</div>
+

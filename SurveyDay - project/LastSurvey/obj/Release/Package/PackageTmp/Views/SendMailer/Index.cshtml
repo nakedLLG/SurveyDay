@@ -1,0 +1,54 @@
+﻿@model LastSurvey.Models.MailModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@if (Session["LoggedUserNumber"] != null && Session["LoggedUserNumber"].ToString() == "admin")
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-envelope"></span> Send a message to all the patients</h3>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-warning" role="alert">By submiting the form you will send email to all users!</div>
+            @using (Html.BeginForm())
+            {
+            <div class="form-horizontal">
+                @Html.ValidationSummary()
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Subject, "Subject: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Body, "Body: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(m => m.Body, new { @class = "form-control", @rows="8" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <button class="col-md-offset-2 btn btn-default" type="submit" value="Send">Send</button>
+            </div>
+            
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-ban-circle"></span> Something gone wrong!</h3>
+        </div>
+        <div class="panel-body">
+            <h2>Ooops! You have been logged out</h2>
+            <h3>Only logged users can access this page!</h3>
+            <a href="@Url.Action("Index", "Home") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Go to survey list">
+                <span class="glyphicon glyphicon glyphicon-home"></span><span> Log in</span>
+            </a>
+        </div>
+
+    </div>
+}

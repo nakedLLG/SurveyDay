@@ -1,0 +1,83 @@
+﻿@model LastSurvey.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@if (Session["LoggedUserNumber"] != null && Session["LoggedUserNumber"].ToString() == "admin")
+{
+    //*Page Users/Details//
+    //Visible for admin only//
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-check"></span> Details</h3>
+        </div>
+        <div class="panel-body">
+            <h4>User @Model.UserNumber</h4>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Password)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Password)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsAdmin)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsAdmin)
+                </dd>
+
+            </dl>
+
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-11">
+                    <a href="@Url.Action("IndexAdmin")" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="go back">
+                        <span class="glyphicon glyphicon-backward"></span>
+                        <span> Back to list</span>
+                    </a>
+                    <a href="@Url.Action("Edit", new { id = Model.UserID })" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        <span> Edit</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-ban-circle"></span> Something gone wrong!</h3>
+        </div>
+        <div class="panel-body">
+            <h2>Ooops! You have been logged out</h2>
+            <h3>Only logged users can access this page!</h3>
+            <a href="@Url.Action("Index", "Home") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Go to survey list">
+                <span class="glyphicon glyphicon glyphicon-home"></span><span> Log in</span>
+            </a>
+        </div>
+
+    </div>
+}

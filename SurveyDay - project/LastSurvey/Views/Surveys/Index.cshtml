@@ -1,0 +1,81 @@
+﻿@model IEnumerable<LastSurvey.Models.Survey>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Session["LoggedUserNumber"] != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-list"></span> Survey List</h3>
+        </div>
+        <div class="panel-body">
+            <h4>Press start to fill the survey</h4>
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th class="hidden-xs hidden-sm">
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th class="hidden-xs hidden-sm">
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        <div class="btn-toolbar" role="toolbar" aria-label="Actions">
+                            <div class="btn-group" role="group" aria-label="Start">
+                                <a class="btn btn-default hidden-xs hidden-sm" href="@Url.Action("Start", new { id = item.SurveyID })" data-toggle="tooltip" data-placement="right" title="start">
+                                    <span class="glyphicon glyphicon-play-circle"></span>
+                                    Start
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Start">
+                                <a class="btn btn-default hidden-md hidden-lg" href="@Url.Action("Start", new { id = item.SurveyID })" data-toggle="tooltip" data-placement="right" title="start">
+                                    <span class="glyphicon glyphicon-play-circle"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </td>                   
+                </tr>
+}
+
+        </table>
+</div>
+}
+else
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-ban-circle"></span> Something gone wrong!</h3>
+        </div>
+        <div class="panel-body">
+            <h2>Ooops! You have been logged out</h2>
+            <h3>Only logged users can access this page!</h3>
+            <a href="@Url.Action("Index", "Home") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Go to survey list">
+                <span class="glyphicon glyphicon glyphicon-home"></span><span> Log in</span>
+            </a>
+        </div>
+
+    </div>
+}

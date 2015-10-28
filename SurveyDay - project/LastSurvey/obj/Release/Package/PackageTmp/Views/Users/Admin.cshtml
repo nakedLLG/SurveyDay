@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (Session["LoggedUserNumber"] != null && Session["LoggedUserNumber"].ToString() == "admin")
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-home"></span> Welcome to Survey Day</h3>
+        </div>
+        <div class="panel-body">
+            
+            <h4>Hello: @Session["LoggedUserNumber"].ToString()</h4>
+            <h3>Welcome to Survey Day system.</h3>
+            <p>Help the doctors by participating in different medical surveys. Your input is very important - it helps the doctors to develop new methods and medicine to combat different medical conditions. The data is gathered daily and is reviewed by the doctors. </p>
+            <p>Filling out a survey is effortless and straight forward!</p>
+            <p>Add user, make survey, collect data</p>
+        </div>
+
+    </div>
+
+}
+else
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-ban-circle"></span> Something gone wrong!</h3>
+        </div>
+        <div class="panel-body">
+            <h2>Ooops! You have been logged out</h2>
+            <h3>Only logged users can access this page!</h3>
+            <a href="@Url.Action("Index", "Home") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Go to survey list">
+                <span class="glyphicon glyphicon glyphicon-home"></span><span> Log in</span>
+            </a>
+        </div>
+
+    </div>
+}

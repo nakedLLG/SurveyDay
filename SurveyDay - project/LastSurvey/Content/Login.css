@@ -1,0 +1,254 @@
+﻿@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Indie+Flower);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+body {
+    background-color: #d4e4f4;
+    background-image: url('img/gplay.png');
+
+
+
+
+	/*background: rgb(212, 228, 244);
+    background: url('img/bg3.jpg') no-repeat center center fixed;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+	
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;*/
+    font-family: Ubuntu;
+    font-size: 150%;
+}
+p {
+    color: #717171;
+}
+* {
+    -webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	outline: none;
+}
+h1
+h2
+h3
+h4 {
+     font-family: Ubuntu !important;
+}
+
+.form-control {
+	position: relative;
+	font-size: 16px;
+	 height: auto;
+	 padding: 10px;
+	@include box-sizing(border-box);
+
+	&:focus {
+	 z-index: 2;
+	}
+	}
+
+
+
+.login-form {
+	margin-top: 60px;
+    opacity: 0.95;
+}
+
+form[role=login] {
+	color: #FFF;
+	/*background: #e5ebeb;*/
+    background:none;
+    border:3px solid #27525E;
+	padding: 26px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+form[role=login] img {
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 35px;
+	}
+form[role=login] input,
+form[role=login] button {
+		font-size: 18px;
+		margin: 16px 0;
+	}
+form[role=login] > div {
+		text-align: center;
+	}
+
+::-webkit-input-placeholder {
+   color: #27525E !important;
+   /*A2D4E3*/
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #5bc0de !important;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #5bc0de !important;  
+}	
+.form-links {
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 50px;
+}
+.form-links a {
+	color: #fff;
+}
+
+
+
+.navbar-fixed-top .nav {
+    padding: 15px 0;
+}
+
+.navbar-fixed-top .navbar-brand {
+    padding: 0 15px;
+}
+.navbar-brand {
+	margin-top: 5px !important;
+}
+.img-responsive {
+	height:40px;
+}
+.navbar-brand{
+	padding-top:10px !important;
+
+}
+.navbar {
+	border-bottom:1px solid #e7e7e7 !important;
+	height:71px !important;
+	
+}
+.navbar-default {
+	background-color: #27525E !important;
+}
+.navbar-header {
+	height: 70px !important;
+
+}
+
+.navbar-collapse {
+	background-color: #27525E !important;
+    clear:both;
+	
+}
+
+
+.navbar-collapse li:last-child {
+	background-color: #169ed9 !important;
+	color:#FFF !important;
+
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus
+ {
+  background-color: #c9eefe !important;
+  color: #FFF !important;
+}
+.navbar-right {
+    border-bottom: 1px solid #EEE !important;
+}
+
+.white-text {
+	color: #FFF !important;
+}
+.navbar-toggle {
+	margin-top: 17px !important;
+}
+
+.icon-bar {
+	background-color: #169ed9 !important;
+}
+.navbar-default .navbar-toggle {
+  border-color: #169ed9 !important;
+}
+
+a {
+	color:#27525E !important;
+}
+h4 {
+		color:#27525E !important;
+}
+
+
+/*bootstrap outline*/
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+    border:2px solid;
+}
+
+.btn-info.btn-outline {
+    color: #27525E;
+    border-color: #27525E;
+}
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+    color: #FFF;
+    background-color: #27525E;
+
+
+}
+.btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+    background-color: #27525E;
+}
+
+/*outline ends*/
+/*Override of bootsrap buttons*/
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+  color: #fff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+.btn-success, .btn-danger {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+/*Removing borders from table rows - it's desktop first but it's the only way*/
+@media screen and (max-width:768px){
+.table-trasparent>thead>tr>th, .table-trasparent>tbody>tr>th, .table-trasparent>tfoot>tr>th, .table-trasparent>thead>tr>td, .table-trasparent>tbody>tr>td, .table-trasparent>tfoot>tr>td {
+border: none;
+background-color: transparent;
+}
+.table>tbody>tr>td{
+    margin-right: 0;
+    width: 100%;
+}
+.table .table{
+    background-color: transparent;
+}
+}
+
+@media screen and (min-width:768px) {
+    .navbar-fixed-top .navbar-brand {
+        padding: 15px 0;
+    }
+      .navbar-nav>li>a {
+  		padding-top: 30px;
+  	}
+  	.navbar-collapse li:last-child {
+	border-bottom: 1px solid #EEE !important;
+    
+	}
+    .navbar-collapse {
+        clear: none;
+    }
+   .navbar-right {
+    border-bottom: none !important;
+}
+}
+
+
+
+

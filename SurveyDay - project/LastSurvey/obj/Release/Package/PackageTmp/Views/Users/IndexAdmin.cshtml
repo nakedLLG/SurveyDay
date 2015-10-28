@@ -1,0 +1,95 @@
+﻿@model IEnumerable<LastSurvey.Models.User>
+
+@{
+    ViewBag.Title = "IndexAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@if (Session["LoggedUserNumber"] != null && Session["LoggedUserNumber"].ToString() == "admin")
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Users List</h3>
+        </div>
+        <div class="panel-body">
+            <h4>
+                <a href="@Url.Action("Create")" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Create New">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span>Create New</span>
+                </a>
+            </h4>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserNumber)
+                </th>
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+                <th class="hidden-xs hidden-sm">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th class="hidden-xs hidden-sm">
+                    @Html.DisplayNameFor(model => model.IsAdmin)
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserNumber)
+                    </td>
+                    <td class="hidden-xs">
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+                        @Html.DisplayFor(modelItem => item.IsAdmin)
+                    </td>
+                    <td>
+                        <div class="btn-toolbar" role="toolbar" aria-label="Actions">
+                            <div class="btn-group" role="group" aria-label="Edit">
+                                <a href="@Url.Action("Edit", new { id = item.UserID })" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Edit">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Details">
+                                <a href="@Url.Action("Details", new { id = item.UserID })" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Details">
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Delete">                                   
+                                <a href="@Url.Action("Delete", new { id = item.UserID })" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Delete">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+else
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-ban-circle"></span> Something gone wrong!</h3>
+        </div>
+        <div class="panel-body">
+            <h2>Ooops! You have been logged out</h2>
+            <h3>Only logged users can access this page!</h3>
+            <a href="@Url.Action("Index", "Home") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Go to survey list">
+                <span class="glyphicon glyphicon glyphicon-home"></span><span> Log in</span>
+            </a>
+        </div>
+
+    </div>
+}

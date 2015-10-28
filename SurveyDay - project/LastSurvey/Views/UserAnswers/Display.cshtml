@@ -1,0 +1,72 @@
+﻿@model IEnumerable<LastSurvey.Models.UserAnswer>
+
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_AdminLayoutResult.cshtml";
+}
+@if (Session["LoggedUserNumber"] != null && Session["LoggedUserNumber"].ToString() == "admin")
+{
+    //*Page Question/Create*//
+    //Visible for admin only//
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-eye-open"></span> Result for @ViewBag.Surv.Title (average for symptoms and medications)</h3>
+        </div>
+        <div class="panel-body">
+            <input id="medicationAvg" type="hidden" value="@ViewBag.MScore "/>
+            <input id="symptomAvg"  type="hidden" value="@ViewBag.SScore" />
+
+            <div class="col-md-10">
+                <canvas id="symptomAndMedAvg" class="col-md-offset-1"></canvas>
+            </div>
+        </div>
+
+        
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-eye-open"></span> Result for @ViewBag.Surv.Title (number of days)</h3>
+        </div>
+        <div class="panel-body">
+            <input id="datesNumber" type="hidden" value="@ViewBag.Ndates" />
+
+            <div class="col-md-10">
+                <canvas id="daysTotal" class="col-md-offset-1"></canvas>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-eye-open"></span> Result for @ViewBag.Surv.Title (number of users)</h3>
+        </div>
+        <div class="panel-body">
+            <input id="usersNumber" type="hidden" value="@ViewBag.Nusers" />
+            <div class="col-md-10">
+                <canvas id="usersTotal" class="col-md-offset-1"></canvas>
+            </div>
+        </div>
+
+    
+    </div>
+    
+<script src="~/Scripts/results.js"></script>
+}
+else
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-ban-circle"></span> Something gone wrong!</h3>
+        </div>
+        <div class="panel-body">
+            <h2>Ooops! You have been logged out</h2>
+            <h3>Only logged users can access this page!</h3>
+            <a href="@Url.Action("Index", "Home") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Go to survey list">
+                <span class="glyphicon glyphicon glyphicon-home"></span><span> Log in</span>
+            </a>
+        </div>
+
+    </div>
+
+}

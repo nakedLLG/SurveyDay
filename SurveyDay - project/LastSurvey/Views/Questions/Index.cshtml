@@ -1,0 +1,188 @@
+﻿@model IEnumerable<LastSurvey.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["LoggedUserNumber"] != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-list"></span> @ViewBag.Surv.Title</h3>
+        </div>
+        <div class="panel-body">
+            <h4>Please answer to all the questions below</h4>
+        </div>
+        <div class="hidden-xs hidden-sm">
+            @using (Html.BeginForm("Submitted", "Questions", new { id = ViewBag.Surv.SurveyID }, FormMethod.Post))
+            {
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Question1)
+                        </th>
+                        <th>
+                            Options
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category)
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Question1)
+                            </td>
+                            <td>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <!--Creating radio buttons using the QuestionType-->
+                                    @if (item.QuestionType.QuestionType1 == "yes/no")
+                                    {
+                                        <label class="btn btn-default active"><input type="radio" value="@item.MinValue" name="@item.QuestionID" autocomplete="off" checked>No</label>
+                                        <label class="btn btn-default"><input type="radio" value="@item.MaxValue" name="@item.QuestionID">Yes</label>
+                                        
+                                    }
+                                    else
+                                    {
+                                        if (item.QuestionType.QuestionType1 == "points")
+                                        {
+                                            for (var i = item.MinValue; i <= item.MaxValue; i++)
+                                            {
+                                                if (i == item.MinValue)
+                                                {
+                                                    <label class="btn btn-default active"><input type="radio" value="@i" name="@item.QuestionID" autocomplete="off" checked>@i</label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="btn btn-default margin"><input type="radio" value="@i" name="@item.QuestionID">@i</label>
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <input type="text" name="@item.QuestionID" class="form-control" />
+                                        }
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    } <!--End of foreach-->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </td>
+                    </tr>
+                </table>
+
+            } <!--End of Form-->
+        </div><!--End of Layout for md-devices and lg-devices-->
+        <!--Begin of Layout for xs-devices and sm-devices-->
+        <div class="hidden-md hidden-lg">
+            @using (Html.BeginForm("Submitted", "Questions", new { id = ViewBag.Surv.SurveyID }, FormMethod.Post))
+            {
+
+                <table class="table">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <table class="table-trasparent">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Category)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Category)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Question1)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Question1)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            Options
+                                        </th>
+                                        <td>
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <!--Creating radio buttons using the QuestionType-->
+                                                @if (item.QuestionType.QuestionType1 == "yes/no")
+                                                {
+                                                    
+                                                    <label class="btn btn-default active"><input type="radio" value="@item.MinValue" name="@item.QuestionID" autocomplete="off" checked>No</label>
+                                                    <label class="btn btn-default"><input type="radio" value="@item.MaxValue" name="@item.QuestionID">Yes</label>
+                                                    
+                                                }
+                                                else
+                                                {
+                                                    if (item.QuestionType.QuestionType1 == "points")
+                                                    {
+                                                        for (var i = item.MinValue; i <= item.MaxValue; i++)
+                                                        {
+                                                            if (i == item.MinValue)
+                                                            {
+                                                                <label class="btn btn-default active"><input type="radio" value="@i" name="@item.QuestionID" autocomplete="off" checked>@i</label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label class="btn btn-default"><input type="radio" value="@i" name="@item.QuestionID">@i</label>
+                                                            }
+
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" name="@item.QuestionID" class="form-control" />
+                                                    }
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    } <!--End of foreach-->
+                    <tr>
+                        <td>
+                            <button type="submit" class="btn btn-default pull-right">Submit</button>
+                        </td>
+                        <td class="clearfix">
+
+                        </td>
+                    </tr>
+                </table>
+                
+            } <!--End of Form-->
+            
+        </div><!--End of Layout for xs-devices and sm-devices-->
+        
+    </div><!--End of Panel-->
+    <!--End of user Session after this line the content will be visible also for not-logged users-->
+}
+else
+{
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-ban-circle"></span> Something gone wrong!</h3>
+    </div>
+    <div class="panel-body">
+        <h2>Ooops! You have been logged out</h2>
+        <h3>Only logged users can access this page!</h3>
+        <a href="@Url.Action("Index", "Home") " class=" btn btn-default" data-toggle="tooltip" data-placement="left" title="Go to survey list">
+            <span class="glyphicon glyphicon glyphicon-home"></span><span> Log in</span>
+        </a>
+    </div>
+
+</div>
+}
